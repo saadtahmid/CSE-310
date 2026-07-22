@@ -18,7 +18,7 @@ public:
     while (curr != NULL) {
       ScopeTable *temp = curr;
       curr = curr->get_parent_scope();
-      std::cout << "\tScopeTable# " << temp->get_id() << " removed\n";
+      // std::cout << "\tScopeTable# " << temp->get_id() << " removed\n";
       delete temp;
     }
   }
@@ -26,7 +26,7 @@ public:
     ScopeTable *child = new ScopeTable(N);
     child->set_parent_scope(current_scope);
     current_scope = child;
-    std::cout << "\tScopeTable# " << current_scope->get_id() << " created\n";
+    // std::cout << "\tScopeTable# " << current_scope->get_id() << " created\n";
   }
   void exit_scope() {
     // cannot exit the root scope table
@@ -34,14 +34,15 @@ public:
       return;
     }
     ScopeTable *temp = current_scope;
-    std::cout << "\tScopeTable# " << temp->get_id() << " removed\n";
+    // std::cout << "\tScopeTable# " << temp->get_id() << " removed\n";
     current_scope = current_scope->get_parent_scope();
     delete temp;
   }
   bool insert(std::string args[], int arg_idx) {
     if (current_scope == NULL) {
       current_scope = new ScopeTable(N);
-      std::cout << "\tScopeTable# " << current_scope->get_id() << " created\n";
+      current_scope->set_parent_scope(NULL);
+      // std::cout << "\tScopeTable# " << current_scope->get_id() << " created\n";
     }
     return current_scope->insert(args, arg_idx);
   }
@@ -64,15 +65,13 @@ public:
   }
   void print_current_scope() {
     if (current_scope != NULL)
-      current_scope->print_scope_table(1);
+      current_scope->print_scope_table();
   }
   void print_symbol_table() {
     ScopeTable *curr = current_scope;
-    int indent = 1;
     while (curr != NULL) {
-      curr->print_scope_table(indent);
+      curr->print_scope_table();
       curr = curr->get_parent_scope();
-      indent++;
     }
   }
   ScopeTable *get_current_scope() { return current_scope; }
