@@ -7,7 +7,6 @@ class SymbolInfo {
 private:
   std::string name;
   std::string type;
-
 public:
   SymbolInfo *next;
   SymbolInfo(std::string name, std::string type) {

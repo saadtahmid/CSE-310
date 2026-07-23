@@ -1,0 +1,28 @@
+void main() {
+    int _validID = 100;
+    float pi = 3.14159;
+    
+    // Testing nested scopes
+    {
+        int _validID = 200; 
+        {
+            float pi = 3.14;
+        }
+    }
+
+    // Testing complex strings and escapes
+    char str[] = "String with \n newline and \t tab and \
+line continuation.";
+
+    // Testing tricky comment overlaps
+    /* This is a block comment // with a single line inside */
+    // This is a single line comment /* with a block inside */
+
+    // Testing errors
+    float err1 = 1.2.3.4;
+    int err2 = 123_invalid;
+    char err3 = 'abc';
+    char err4 = '\';
+
+    /* Unterminated block comment starts here
+    and never ends...

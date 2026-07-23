@@ -10,12 +10,14 @@
 class ScopeTable {
 private:
   unsigned int SDBMHash(std::string str, unsigned int num_buckets) {
-    unsigned long hash = 0;
-    unsigned int len = str.length();
-    for (unsigned int i = 0; i < len; i++) {
-      hash = (str[i] + (hash << 6) + (hash << 16) - hash) % num_buckets;
+    unsigned int hash = 0;
+    const char *p = str.c_str();
+    auto *s = (unsigned char *) p;
+    int c{};
+    while ((c = *s++)) {
+      hash = c + (hash << 6) + (hash << 16) - hash;
     }
-    return hash;
+    return hash % num_buckets;
   }
 
   std::string id;
@@ -90,15 +92,13 @@ public:
     SymbolInfo *curr = table[index];
     if (curr == NULL) {
       table[index] = new SymbolInfo(s.get_name(), s.get_type());
-      // std::cout << "\tInserted in ScopeTable# " << id << " at position "
-      //      << (index + 1) << ", " << 1 << "\n";
       return true;
     }
-    int pos = 1;
+    int pos = 0;
     while (true) {
       if (curr->get_name() == s.get_name()) {
-        std::cout << "\t'" << s.get_name()
-             << "' already exists in the current ScopeTable\n";
+        std::cout << "< " << s.get_name() << " : " << s.get_type()
+             << " > already exists in ScopeTable# " << id << " at position " << index << ", " << pos << "\n\n";
         return false;
       }
       if (curr->get_next() == NULL)
@@ -108,8 +108,6 @@ public:
     }
     SymbolInfo *new_symbol = new SymbolInfo(s.get_name(), s.get_type());
     curr->set_next(new_symbol);
-    // std::cout << "\tInserted in ScopeTable# " << id << " at position " << (index + 1)
-    //      << ", " << (pos + 1) << "\n";
     return true;
   }
 
@@ -119,8 +117,6 @@ public:
     int pos = 1;
     while (curr != NULL) {
       if (curr->get_name() == name) {
-        // std::cout << "\t'" << name << "' found in ScopeTable# " << id
-        //      << " at position " << (index + 1) << ", " << pos << "\n";
         return curr;
       }
       curr = curr->get_next();
@@ -138,8 +134,6 @@ public:
     }
     if (curr->get_name() == name) {
       table[index] = curr->get_next();
-      // std::cout << "\tDeleted '" << name << "' from ScopeTable# " << id
-      //      << " at position " << (index + 1) << ", " << 1 << "\n";
       delete curr;
       return true;
     }
@@ -148,8 +142,6 @@ public:
       if (curr->get_next()->get_name() == name) {
         SymbolInfo *temp = curr->get_next();
         curr->set_next(temp->get_next());
-        // std::cout << "\tDeleted '" << name << "' from ScopeTable# " << id
-        //      << " at position " << (index + 1) << ", " << pos << "\n";
         delete temp;
         return true;
       }
@@ -161,17 +153,17 @@ public:
   }
 
   void print_scope_table() {
-    std::cout << "ScopeTable# " << id << "\n";
+    std::cout << "ScopeTable # " << id << "\n";
     for (unsigned int i = 0; i < size; i++) {
       if(table[i]!=NULL){
-        std::cout << (i + 1) << "--> ";
-      SymbolInfo *curr = table[i];
-      while (curr != NULL) {
-        std::cout << "<" << curr->get_name() << "," << curr->get_type() << "> ";
-        curr = curr->get_next();
+        std::cout << i << " --> ";
+        SymbolInfo *curr = table[i];
+        while (curr != NULL) {
+          std::cout << "< " << curr->get_name() << " : " << curr->get_type() << " >";
+          curr = curr->get_next();
+        }
+        std::cout << "\n";
       }
-      std::cout << "\n";
-    }
     }
   }
 };

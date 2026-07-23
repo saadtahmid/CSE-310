@@ -73,6 +73,7 @@ public:
       curr->print_scope_table();
       curr = curr->get_parent_scope();
     }
+    std::cout << "\n";
   }
   ScopeTable *get_current_scope() { return current_scope; }
 };

@@ -1,0 +1,265 @@
+Line no 1: Token <VOID> Lexeme void found
+
+Line no 1: Token <ID> Lexeme main found
+
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 1: Token <LPAREN> Lexeme ( found
+
+Line no 1: Token <RPAREN> Lexeme ) found
+
+Line no 1: Token <LCURL> Lexeme { found
+
+Line no 2: Token <INT> Lexeme int found
+
+Line no 2: Token <ID> Lexeme _validID found
+
+ScopeTable # 1.1
+1 --> < _validID : ID >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 2: Token <ASSIGNOP> Lexeme = found
+
+Line no 2: Token <CONST_INT> Lexeme 100 found
+
+ScopeTable # 1.1
+1 --> < _validID : ID >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 2: Token <SEMICOLON> Lexeme ; found
+
+Line no 3: Token <FLOAT> Lexeme float found
+
+Line no 3: Token <ID> Lexeme pi found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 3: Token <ASSIGNOP> Lexeme = found
+
+Line no 3: Token <CONST_FLOAT> Lexeme 3.14159 found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+3 --> < 3.14159 : CONST_FLOAT >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 3: Token <SEMICOLON> Lexeme ; found
+
+Line no 5: Token <COMMENT> Lexeme // Testing nested scopes found
+
+Line no 6: Token <LCURL> Lexeme { found
+
+Line no 7: Token <INT> Lexeme int found
+
+Line no 7: Token <ID> Lexeme _validID found
+
+ScopeTable # 1.1.1
+1 --> < _validID : ID >
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+3 --> < 3.14159 : CONST_FLOAT >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 7: Token <ASSIGNOP> Lexeme = found
+
+Line no 7: Token <CONST_INT> Lexeme 200 found
+
+ScopeTable # 1.1.1
+1 --> < _validID : ID >
+4 --> < 200 : CONST_INT >
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+3 --> < 3.14159 : CONST_FLOAT >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 7: Token <SEMICOLON> Lexeme ; found
+
+Line no 8: Token <LCURL> Lexeme { found
+
+Line no 9: Token <FLOAT> Lexeme float found
+
+Line no 9: Token <ID> Lexeme pi found
+
+ScopeTable # 1.1.1.1
+0 --> < pi : ID >
+ScopeTable # 1.1.1
+1 --> < _validID : ID >
+4 --> < 200 : CONST_INT >
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+3 --> < 3.14159 : CONST_FLOAT >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 9: Token <ASSIGNOP> Lexeme = found
+
+Line no 9: Token <CONST_FLOAT> Lexeme 3.14 found
+
+ScopeTable # 1.1.1.1
+0 --> < pi : ID >
+2 --> < 3.14 : CONST_FLOAT >
+ScopeTable # 1.1.1
+1 --> < _validID : ID >
+4 --> < 200 : CONST_INT >
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+3 --> < 3.14159 : CONST_FLOAT >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 9: Token <SEMICOLON> Lexeme ; found
+
+Line no 10: Token <RCURL> Lexeme } found
+
+Line no 11: Token <RCURL> Lexeme } found
+
+Line no 13: Token <COMMENT> Lexeme // Testing complex strings and escapes found
+
+Line no 14: Token <CHAR> Lexeme char found
+
+Line no 14: Token <ID> Lexeme str found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+3 --> < 3.14159 : CONST_FLOAT >< str : ID >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 14: Token <LTHIRD> Lexeme [ found
+
+Line no 14: Token <RTHIRD> Lexeme ] found
+
+Line no 14: Token <ASSIGNOP> Lexeme = found
+
+Line no 15: Token <STRING> Lexeme "String with \n newline and \t tab and \
+line continuation." found --> <STRING, String with 
+ newline and 	 tab and line continuation.>
+
+Line no 15: Token <SEMICOLON> Lexeme ; found
+
+Line no 17: Token <COMMENT> Lexeme // Testing tricky comment overlaps found
+
+Line no 18: Token <COMMENT> Lexeme /* This is a block comment // with a single line inside */ found
+
+Line no 19: Token <COMMENT> Lexeme // This is a single line comment /* with a block inside */ found
+
+Line no 21: Token <COMMENT> Lexeme // Testing errors found
+
+Line no 22: Token <FLOAT> Lexeme float found
+
+Line no 22: Token <ID> Lexeme err1 found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+2 --> < err1 : ID >
+3 --> < 3.14159 : CONST_FLOAT >< str : ID >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 22: Token <ASSIGNOP> Lexeme = found
+
+Error at line no 22: Too many decimal points 1.2.3.4
+
+
+Line no 22: Token <SEMICOLON> Lexeme ; found
+
+Line no 23: Token <INT> Lexeme int found
+
+Line no 23: Token <ID> Lexeme err2 found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+2 --> < err1 : ID >
+3 --> < 3.14159 : CONST_FLOAT >< str : ID >< err2 : ID >
+4 --> < 100 : CONST_INT >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 23: Token <ASSIGNOP> Lexeme = found
+
+Error at line no 23: Invalid prefix on ID or invalid suffix on Number 123_invalid
+
+Line no 23: Token <SEMICOLON> Lexeme ; found
+
+Line no 24: Token <CHAR> Lexeme char found
+
+Line no 24: Token <ID> Lexeme err3 found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+2 --> < err1 : ID >
+3 --> < 3.14159 : CONST_FLOAT >< str : ID >< err2 : ID >
+4 --> < 100 : CONST_INT >< err3 : ID >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 24: Token <ASSIGNOP> Lexeme = found
+
+Error at line no 24: Multi character constant error 'abc'
+
+
+Line no 24: Token <SEMICOLON> Lexeme ; found
+
+Line no 25: Token <CHAR> Lexeme char found
+
+Line no 25: Token <ID> Lexeme err4 found
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+2 --> < err1 : ID >
+3 --> < 3.14159 : CONST_FLOAT >< str : ID >< err2 : ID >
+4 --> < 100 : CONST_INT >< err3 : ID >
+5 --> < err4 : ID >
+ScopeTable # 1
+6 --> < main : ID >
+
+Line no 25: Token <ASSIGNOP> Lexeme = found
+
+Error at line no 25: Unterminated character '\';
+
+
+Error at line no 27: Unterminated comment /* Unterminated block comment starts here
+    and never ends...
+
+
+ScopeTable # 1.1
+0 --> < pi : ID >
+1 --> < _validID : ID >
+2 --> < err1 : ID >
+3 --> < 3.14159 : CONST_FLOAT >< str : ID >< err2 : ID >
+4 --> < 100 : CONST_INT >< err3 : ID >
+5 --> < err4 : ID >
+ScopeTable # 1
+6 --> < main : ID >
+
+Total lines: 29
+Total errors: 5

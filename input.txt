@@ -1,0 +1,15 @@
+int main() {
+    // A single line comment
+    int x = 5;
+    float y = 3.14;
+    char c = 'a';
+    char tab = '\t';
+    string s = "Hello World\nMulti line\
+ string";
+    if (x >= 5) {
+        y++;
+    }
+    /* Multi line 
+       comment */
+    return 0;
+}
